@@ -2,21 +2,328 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <title>Retail Visit Record</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="description" content="意大利电子烟零售网点访店路线、现场汇报与市场分析入口。">
+  <title>Italy Retail Visit Hub</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --surface: #ffffff;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --green: #0f766e;
+      --bg: #f8fafc;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: inherit; }
+
+    .hero {
+      padding: 52px 24px 70px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 85% 20%, rgba(59, 130, 246, .45), transparent 32%),
+        linear-gradient(135deg, #020617, #172554 55%, #1d4ed8);
+    }
+
+    .hero-inner,
+    main {
+      width: min(1080px, 100%);
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 999px;
+      color: #bfdbfe;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(34px, 6vw, 58px);
+      line-height: 1.08;
+      letter-spacing: -.035em;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 18px 0 0;
+      color: #dbeafe;
+      font-size: 17px;
+    }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .stat {
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, .2);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .08);
+      font-size: 13px;
+      backdrop-filter: blur(8px);
+    }
+
+    main { padding: 0 24px 48px; }
+
+    .entry-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      margin-top: -38px;
+    }
+
+    .entry-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, .1);
+    }
+
+    .entry-card.primary { border-top: 5px solid var(--blue); }
+    .entry-card.secondary { border-top: 5px solid var(--green); }
+
+    .card-label {
+      color: var(--blue-dark);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .05em;
+    }
+
+    .secondary .card-label { color: var(--green); }
+
+    h2 {
+      margin: 7px 0 8px;
+      font-size: 25px;
+      line-height: 1.25;
+    }
+
+    .entry-card > p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .feature-list {
+      display: grid;
+      gap: 8px;
+      margin: 18px 0 22px;
+      padding: 0;
+      list-style: none;
+      font-size: 14px;
+    }
+
+    .feature-list li::before {
+      content: "✓";
+      margin-right: 8px;
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: auto;
+      padding: 11px 16px;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--blue);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 850;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .secondary .button { background: var(--green); }
+
+    .button:hover,
+    .button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(37, 99, 235, .22);
+    }
+
+    .section {
+      margin-top: 24px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface);
+    }
+
+    .section h2 { margin-top: 0; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      padding: 15px;
+      border-radius: 13px;
+      background: #f8fafc;
+    }
+
+    .step b {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .step i {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-style: normal;
+      font-size: 12px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notice {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      margin-top: 20px;
+      padding: 16px;
+      border: 1px solid #fde68a;
+      border-radius: 13px;
+      color: #78350f;
+      background: #fffbeb;
+      font-size: 13px;
+    }
+
+    .notice strong { font-size: 18px; }
+
+    footer {
+      padding: 10px 24px 34px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .hero { padding: 34px 18px 56px; }
+      .hero p { font-size: 15px; }
+      main { padding: 0 12px 32px; }
+      .entry-grid { grid-template-columns: 1fr; margin-top: -28px; }
+      .entry-card { padding: 20px; border-radius: 16px; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .section { padding: 18px; }
+    }
+
+    @media (max-width: 430px) {
+      .steps { grid-template-columns: 1fr; }
+      .stats { gap: 7px; }
+      .stat { font-size: 12px; }
+    }
+  </style>
 </head>
 <body>
-  <h1>Retail Visit Record</h1>
+  <header class="hero">
+    <div class="hero-inner">
+      <span class="eyebrow">Italy Retail Visit Hub</span>
+      <h1>意大利电子烟零售地推工作台</h1>
+      <p>面向一线业务人员的每日访店执行工具，以及面向管理团队的市场分析与店铺潜力报告。</p>
+      <div class="stats" aria-label="项目概览">
+        <span class="stat">251 家有效目标店</span>
+        <span class="stat">21 天访店路线</span>
+        <span class="stat">手机端现场汇报</span>
+        <span class="stat">店铺潜力与市场分析</span>
+      </div>
+    </div>
+  </header>
 
-  <p>
-    <a href="italy_vape_daily_routes_mobile.html">
-      Italy Vape Daily Routes Mobile
-    </a>
-  </p>
+  <main>
+    <section class="entry-grid" aria-label="功能入口">
+      <article class="entry-card primary">
+        <span class="card-label">业务员主入口 · 手机端优先</span>
+        <h2>每日访店路线与现场汇报</h2>
+        <p>出发、导航、拨号、填写访店结果并提交日报。适合业务人员在手机浏览器中直接使用。</p>
+        <ul class="feature-list">
+          <li>按 Day 分页查看当天门店和拜访顺序</li>
+          <li>Google Maps 分段导航及单店导航</li>
+          <li>结构化填写联系人、竞品、意向和跟进计划</li>
+          <li>本地保存进度，一键复制当天访店汇报</li>
+        </ul>
+        <a class="button" href="italy_vape_daily_routes_mobile.html#day-1">打开手机访店工作台</a>
+      </article>
 
-  <p>
-    <a href="italy_vape_retail_gtm_route_guide_with_store_profiles.html">
-      Italy Vape Retail GTM Route Guide
-    </a>
-  </p>
+      <article class="entry-card secondary">
+        <span class="card-label">管理与规划入口</span>
+        <h2>市场分析与 GTM 路线指南</h2>
+        <p>查看市场现状、店铺等级、评分规则、城市机会、地图路线以及逐店档案。</p>
+        <ul class="feature-list">
+          <li>城市与店铺分布概览</li>
+          <li>潜力模型维度和分级规则</li>
+          <li>251 家店铺档案与联系方式</li>
+          <li>数据审核及模型升级建议</li>
+        </ul>
+        <a class="button" href="italy_vape_retail_gtm_route_guide_with_store_profiles.html">打开分析报告</a>
+      </article>
+    </section>
+
+    <section class="section" aria-labelledby="quick-start-title">
+      <h2 id="quick-start-title">业务员快速开始</h2>
+      <div class="steps">
+        <div class="step"><b><i>1</i>选择当天路线</b><p>进入手机工作台，选择对应的 Day。</p></div>
+        <div class="step"><b><i>2</i>开始导航</b><p>打开 Google Maps 全程路线或单店导航。</p></div>
+        <div class="step"><b><i>3</i>提交访店汇报</b><p>现场填写模板并提交，系统自动标记完成。</p></div>
+        <div class="step"><b><i>4</i>复制当日汇总</b><p>当天结束后一键复制汇报并发送给团队。</p></div>
+      </div>
+
+      <div class="notice" role="note">
+        <strong>!</strong>
+        <div><b>本地数据提醒：</b>访店进度和汇报保存在当前设备的浏览器中，不会上传到 GitHub，也不会自动同步到其他手机。请勿清除该网站的浏览器数据；每天结束后及时复制并提交当天汇报。</div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Italy Retail Visit Record · Internal field execution and market planning</footer>
 </body>
 </html>
